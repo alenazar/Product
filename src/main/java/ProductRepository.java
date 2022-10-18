@@ -12,28 +12,32 @@ public class ProductRepository {
         productRepository = tmp;
     }
 
-    public void delete(int id) {
+    public void removeById(int id) {
 
-        boolean isId = false;
+        if (findById(id) == null) {
+            throw new NotFoundException("Товара с таким ID нет!");
+        }
+
+        Product[] tmp = new Product[productRepository.length - 1];
+        int copyToIndex = 0;
+        for (Product product : productRepository) {
+            if (product.getId() != id) {
+                tmp[copyToIndex] = product;
+                copyToIndex++;
+            }
+        }
+        productRepository = tmp;
+
+
+    }
+
+    public Product findById(int id) {
         for (Product product : productRepository) {
             if (product.getId() == id) {
-                isId = true;
-                break;
+                return product;
             }
         }
-
-        if (isId) {
-            Product[] tmp = new Product[productRepository.length - 1];
-            int copyToIndex = 0;
-            for (Product product : productRepository) {
-                if (product.getId() != id) {
-                    tmp[copyToIndex] = product;
-                    copyToIndex++;
-                }
-            }
-            productRepository = tmp;
-        }
-
+        return null;
     }
 
 

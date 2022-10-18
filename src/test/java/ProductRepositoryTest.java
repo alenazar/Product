@@ -26,7 +26,7 @@ public class ProductRepositoryTest {
         productRepository.add(testBook);
         productRepository.add(testBook2);
         productRepository.add(testSmartphone);
-        productRepository.delete(100);
+        productRepository.removeById(100);
 
         int expected = 2;
         int actual = productRepository.getProductRepository().length;
@@ -41,12 +41,10 @@ public class ProductRepositoryTest {
         productRepository.add(testBook);
         productRepository.add(testBook2);
         productRepository.add(testSmartphone);
-        productRepository.delete(2);
 
-        int expected = 3;
-        int actual = productRepository.getProductRepository().length;
-
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertThrows(NotFoundException.class, () -> {
+            productRepository.removeById(2);
+        });
 
     }
 }

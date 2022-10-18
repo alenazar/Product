@@ -57,7 +57,7 @@ public class ProductManagerTest {
         ProductManager productManager = new ProductManager();
         productManager.add(testBook);
         productManager.add(testSmartphone);
-        productManager.delete(100);
+        productManager.removeById(100);
 
         int expected = 0;
         int actual = productManager.searchBy("Муму").length;

@@ -14,8 +14,8 @@ public class ProductManager {
         repository.add(product);
     }
 
-    public void delete(int id) {
-        repository.delete(id);
+    public void removeById(int id) {
+        repository.removeById(id);
     }
 
     public Product[] searchBy(String text) {
